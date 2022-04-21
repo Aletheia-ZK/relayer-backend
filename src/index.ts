@@ -1,15 +1,13 @@
-import Koa from 'koa';
-import Router from '@koa/router';
-import { IncrementalMerkleTree } from '@zk-kit/incremental-merkle-tree';
+import express, { Express, Request, Response } from 'express';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-import { poseidon } from 'circomlibjs'; // v0.0.8
+// import { poseidon } from 'circomlibjs'; // v0.0.8
 import dotenv from 'dotenv';
 dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
 import { createClient } from 'redis';
 
-const app = new Koa();
-const router = new Router();
+const app: Express = express();
+app.use(express.json());
 
 const client = createClient();
 (async () => {
@@ -17,17 +15,20 @@ const client = createClient();
   await client.connect();
 })();
 
-const MERKLE_TREE_HEIGHT = parseInt(process.env.MERKLE_TREE_HEIGHT!);
+// const MERKLE_TREE_HEIGHT = parseInt(process.env.MERKLE_TREE_HEIGHT!);
 
-router.get('/attestation_1', async (ctx: any, next: any) => {
+app.get('/attestation_1', async (req: Request, res: Response) => {
   const attestation1Root = await client.get('attestation_1_root');
   const attestation1Leaves = await client.get('attestation_1_leaves');
-  // console.log('Root value: ', attestation1Root);
-  ctx.body = {
+  res.send({
     attestation_1_root: attestation1Root,
     attestation1Leaves: attestation1Leaves,
-  };
-  next();
+  });
+});
+
+app.post('/identitycommitments', (req: Request, res: Response) => {
+  console.log(req.body);
+  res.send('hello world');
 });
 
 // router.get('/attestation_1/proof/:pubkey', async (ctx: any, next: any) => {
@@ -60,7 +61,9 @@ router.get('/attestation_1', async (ctx: any, next: any) => {
 //   next();
 // });
 
-app.use(router.routes()).use(router.allowedMethods());
+// app.use(koaBody());
+
+// app.use(router.routes()).use(router.allowedMethods());
 
 console.log('Listening on port 4000');
 app.listen(4000);

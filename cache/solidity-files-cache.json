@@ -1,0 +1,188 @@
+{
+  "_format": "hh-sol-cache-2",
+  "files": {
+    "/Users/jan/Documents/Programming/crypto/zku/final_project/reputation_update_service/node_modules/@openzeppelin/contracts/access/Ownable.sol": {
+      "lastModificationDate": 1649812854363,
+      "contentHash": "8398972af73b4e9e5ff3b31cad86234f",
+      "sourceName": "@openzeppelin/contracts/access/Ownable.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../utils/Context.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "Ownable"
+      ]
+    },
+    "/Users/jan/Documents/Programming/crypto/zku/final_project/reputation_update_service/node_modules/@openzeppelin/contracts/utils/Context.sol": {
+      "lastModificationDate": 1649812854363,
+      "contentHash": "5f2c5c4b6af2dd4551027144797bc8be",
+      "sourceName": "@openzeppelin/contracts/utils/Context.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "Context"
+      ]
+    },
+    "/Users/jan/Documents/Programming/crypto/zku/final_project/reputation_update_service/node_modules/@zk-kit/incremental-merkle-tree.sol/contracts/IncrementalBinaryTree.sol": {
+      "lastModificationDate": 1649824040270,
+      "contentHash": "e9fd9c7db00afd5cc323d9d29d155e84",
+      "sourceName": "@zk-kit/incremental-merkle-tree.sol/contracts/IncrementalBinaryTree.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./Hashes.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.4"
+      ],
+      "artifacts": [
+        "IncrementalBinaryTree"
+      ]
+    },
+    "/Users/jan/Documents/Programming/crypto/zku/final_project/reputation_update_service/node_modules/@zk-kit/incremental-merkle-tree.sol/contracts/Hashes.sol": {
+      "lastModificationDate": 1649824040270,
+      "contentHash": "fd04704145cf2784b81cec317a522243",
+      "sourceName": "@zk-kit/incremental-merkle-tree.sol/contracts/Hashes.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.4"
+      ],
+      "artifacts": [
+        "PoseidonT3",
+        "PoseidonT6"
+      ]
+    },
+    "/Users/jan/Documents/Programming/crypto/zku/final_project/reputation_update_service/contracts/Aletheia.sol": {
+      "lastModificationDate": 1650399304039,
+      "contentHash": "7a9d186ce437af15398f7f24cb7fd17a",
+      "sourceName": "contracts/Aletheia.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/access/Ownable.sol",
+        "@zk-kit/incremental-merkle-tree.sol/contracts/IncrementalBinaryTree.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.4"
+      ],
+      "artifacts": [
+        "Aletheia"
+      ]
+    }
+  }
+}

@@ -4,6 +4,17 @@ import express, { Express, Request, Response } from 'express';
 // import { poseidon } from 'circomlibjs'; // v0.0.8
 import dotenv from 'dotenv';
 dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
+import { ethers } from 'ethers';
+
+import aletheiaArtifact from '../artifacts/contracts/Aletheia.sol/Aletheia.json';
+
+const ATTESTATION_MERKLE_TREE_HEIGHT = parseInt(
+  process.env.ATTESTATION_MERKLE_TREE_HEIGHT!
+);
+const ALETHEIA_CONTRACT_ADDRESS = process.env.ALETHEIA_CONTRACT_ADDRESS!;
+const PROVIDER_URL = process.env.PROVIDER_URL!;
+const PRIVATE_KEY = process.env.PRIVATE_KEY!;
+
 import { createClient } from 'redis';
 
 const app: Express = express();
@@ -14,6 +25,29 @@ const client = createClient();
   client.on('error', (err) => console.log('Redis Client Error', err));
   await client.connect();
 })();
+
+function getContract() {
+  const provider = new ethers.providers.JsonRpcProvider(PROVIDER_URL);
+  const wallet = new ethers.Wallet(PRIVATE_KEY, provider);
+  const contract = new ethers.Contract(
+    ALETHEIA_CONTRACT_ADDRESS,
+    aletheiaArtifact['abi'],
+    wallet
+  );
+  return contract;
+}
+
+async function addMember(identityCommitment: string) {
+  const contract = getContract();
+  const formattedIdentityCommitment =
+    ethers.utils.formatBytes32String(identityCommitment);
+  const transaction = await contract.addMember(formattedIdentityCommitment);
+  const transactionReceipt = await transaction.wait();
+  console.log(transactionReceipt);
+  if (transactionReceipt.status !== 1) {
+    console.log('error');
+  }
+}
 
 // const MERKLE_TREE_HEIGHT = parseInt(process.env.MERKLE_TREE_HEIGHT!);
 
@@ -26,9 +60,12 @@ app.get('/attestation_1', async (req: Request, res: Response) => {
   });
 });
 
-app.post('/identitycommitments', (req: Request, res: Response) => {
+app.post('/identitycommitments', async (req: Request, res: Response) => {
+  const identityCommitment = req.body.identityCommitment;
+  console.log(identityCommitment);
   console.log(req.body);
-  res.send('hello world');
+  await addMember(identityCommitment);
+  res.send(identityCommitment);
 });
 
 // router.get('/attestation_1/proof/:pubkey', async (ctx: any, next: any) => {

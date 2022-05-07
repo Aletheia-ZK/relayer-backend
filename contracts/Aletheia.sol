@@ -25,6 +25,10 @@ contract Aletheia is Ownable {
     mapping(string => string) public attestationRoots;
     IncrementalTreeData internal identityTree;
 
+  constructor() {
+      identityTree.init(10,0);
+  }
+
 	function getAttestationRoot(string calldata name) public view returns (string memory) {
 			return attestationRoots[name];
 	}
@@ -40,10 +44,10 @@ contract Aletheia is Ownable {
 	/// @dev Adds an identity commitment to an existing group.
   /// @param identityCommitment: New identity commitment.
   function addMember(uint256 identityCommitment) external {
-    // identityTree.insert(identityCommitment);
-    uint256 root = getIdentityTreeRoot();
+    identityTree.insert(identityCommitment);
+    // uint256 root = getIdentityTreeRoot();
 
-    emit MemberAdded(identityCommitment, root);
+    emit MemberAdded(identityCommitment, identityTree.root);
   }
 
   /// @dev Removes an identity commitment from an existing group. A proof of membership is

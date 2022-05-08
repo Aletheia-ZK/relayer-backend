@@ -15,10 +15,8 @@ const ATTESTATION_MERKLE_TREE_HEIGHT = parseInt(
 const ALETHEIA_CONTRACT_ADDRESS = process.env.ALETHEIA_CONTRACT_ADDRESS!;
 const PROVIDER_URL = process.env.PROVIDER_URL!;
 const PRIVATE_KEY = process.env.PRIVATE_KEY!;
-const MNEMONIC = process.env.MNEMONIC!;
 
 import { createClient } from 'redis';
-import { buildMerkleTree } from './utils';
 
 const app: Express = express();
 app.use(cors());
@@ -62,41 +60,27 @@ async function addMember(identityCommitment: string) {
   }
 }
 
-// const MERKLE_TREE_HEIGHT = parseInt(process.env.MERKLE_TREE_HEIGHT!);
-
 app.get('/attestation_1', async (req: Request, res: Response) => {
-  console.log('test 1');
   const attestation1Root = await client.get('attestation_1_root');
   const attestation1Leaves = await client.get('attestation_1_leaves');
   res.send({
     attestation_1_root: attestation1Root,
-    attestation1Leaves: attestation1Leaves,
+    attestation_1_leaves: attestation1Leaves,
+  });
+});
+
+app.get('/attestation_2', async (req: Request, res: Response) => {
+  const attestation2Root = await client.get('attestation_2_root');
+  const attestation2Leaves = await client.get('attestation_2_leaves');
+  res.send({
+    attestation_2_root: attestation2Root,
+    attestation_2_leaves: attestation2Leaves,
   });
 });
 
 app.post('/identitycommitments', async (req: Request, res: Response) => {
   const identityCommitment = req.body.identityCommitment;
-  console.log('received new add identitycommitment: ', identityCommitment);
-
-  // const oldLeavesString = await client.get('identity_leaves');
-  const oldLeaves = [];
-  // if (oldLeavesString) {
-  //   oldLeaves = JSON.parse(oldLeavesString);
-  // } else {
-  //   oldLeaves = [];
-  // }
-  // console.log('old leaves: ', oldLeaves);
-
-  oldLeaves.push(identityCommitment);
-  const leaves = oldLeaves;
-
-  console.log('new leaves: ', leaves);
-  const tree = buildMerkleTree(leaves);
-
-  // await client.set('identity_leaves', JSON.stringify(tree.leaves));
-  // await client.set('identity_root', tree.root);
-
-  console.log(identityCommitment);
+  console.log('Received new add identitycommitment: ', identityCommitment);
   await addMember(identityCommitment);
   res.sendStatus(200);
 });

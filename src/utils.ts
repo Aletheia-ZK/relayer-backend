@@ -25,5 +25,3 @@ export function buildMerkleTree(leaves: string[]) {
 
   return tree;
 }
-
-// const txs = await getAllTransactionsFromContract(ALETHEIA_CONTRACT_ADDRESS)

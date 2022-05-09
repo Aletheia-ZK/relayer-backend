@@ -4,10 +4,10 @@ import cors from 'cors';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import dotenv from 'dotenv';
-dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
 import { ethers } from 'ethers';
-
 import aletheiaArtifact from '../artifacts/contracts/Aletheia.sol/Aletheia.json';
+
+dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
 
 const ALETHEIA_CONTRACT_ADDRESS = process.env.ALETHEIA_CONTRACT_ADDRESS!;
 const PROVIDER_URL = process.env.PROVIDER_URL!;

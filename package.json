@@ -15,7 +15,7 @@
   },
   "scripts": {
     "build": "tsc -p .",
-    "start": "NODE_ENV=development node dist/index.js",
+    "start": "node dist/src/index.js",
     "dev": "NODE_ENV=development nodemon src/index.ts"
   },
   "devDependencies": {

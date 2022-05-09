@@ -12,6 +12,7 @@ dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
 const ALETHEIA_CONTRACT_ADDRESS = process.env.ALETHEIA_CONTRACT_ADDRESS!;
 const PROVIDER_URL = process.env.PROVIDER_URL!;
 const PRIVATE_KEY = process.env.PRIVATE_KEY!;
+const REDIS_URL = process.env.REDIS_URL;
 
 import { createClient } from 'redis';
 
@@ -22,7 +23,7 @@ app.use(express.json());
 const provider = new ethers.providers.JsonRpcProvider(PROVIDER_URL);
 const wallet = new ethers.Wallet(PRIVATE_KEY, provider);
 
-const client = createClient();
+const client = createClient({ url: REDIS_URL });
 (async () => {
   client.on('error', (err) => console.log('Redis Client Error', err));
   await client.connect();
